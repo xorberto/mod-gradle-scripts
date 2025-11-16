@@ -7,7 +7,7 @@ def FORGE_MOD_LOADER = 'forge'
 def BUKKIT_LOADER = 'bukkit'
 def PAPER_LOADER = 'paper'
 
-def DEFAULT_JAVA_VERSION = '17'
+def DEFAULT_JAVA_VERSION = '21'
 def DEFAULT_MOD_LOADER = FABRIC_MOD_LOADER
 def DEFAULT_MOD_AUTHOR = 'Roberto Guimaraes'
 def DEFAULT_RELEASE_TYPE = 'alpha'
@@ -875,3 +875,4 @@ static boolean satisfiesVersion(String actual, String expected) {
     }
     return true
 }
+
