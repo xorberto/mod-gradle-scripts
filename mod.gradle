@@ -183,8 +183,6 @@ if (is_quilt) {
 if (is_neoforge) {
     // Neoforge gradle
     checkPlugin('net.neoforged.gradle.userdev')
-    // Neoforge mixins
-    checkPlugin('net.neoforged.gradle.mixin')
 }
 if (is_forge) {
     // Forge gradle
@@ -876,4 +874,5 @@ static boolean satisfiesVersion(String actual, String expected) {
     }
     return true 
 }
+
 
