@@ -32,7 +32,7 @@ ext.java_version = getOrDefault('java_version', DEFAULT_JAVA_VERSION) as int
 ext.mod_loader = getOrDefault('mod_loader', DEFAULT_MOD_LOADER)
 ext.mod_authors = getOrDefault('mod_authors', [DEFAULT_MOD_AUTHOR], it -> stringToStringList(it))
 ext.minecraft_user_name_prefix = getOrDefault('minecraft_user_name_prefix', DEFAULT_MINECRAFT_USER_NAME_PREFIX)
-ext.random_minecraft_user_name = getOrDefault('random_minecraft_user_name', true, it -> it.toBoolean())
+ext.random_minecraft_user_name = getOrDefault('random_minecraft_user_name', false, it -> it.toBoolean())
 ext.include_mixins = getOrDefault('include_mixins', true, it -> it.toBoolean()) //TODO Maybe only for Forge/NeoForge, since they are included by default from Fabric
 ext.use_mixins = getOrDefault('use_mixins', false, it -> it.toBoolean()) //TODO Maybe only for Forge/NeoForge, since they are included by default from Fabric
 ext.included_projects = getOrDefault('included_projects', [], it -> stringToStringList(it))
@@ -873,3 +873,4 @@ static boolean satisfiesVersion(String actual, String expected) {
     }
     return true
 }
+
