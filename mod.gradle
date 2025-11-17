@@ -869,10 +869,10 @@ static boolean satisfiesVersion(String actual, String expected) {
     for (int i = 0; i < maxLength; i++) {
         int actualPart = i < actualParts.size() ? actualParts.get(i) : 0
         int expectedPart = i < expectedParts.size() ? expectedParts.get(i) : 0
-        if (actualPart < expectedPart) {
-            return false
+        
+        if (actualPart != expectedPart) {
+            return actualPart > expectedPart
         }
     }
-    return true
+    return true 
 }
-
