@@ -37,7 +37,7 @@ ext.include_mixins = getOrDefault('include_mixins', true, it -> it.toBoolean()) 
 ext.use_mixins = getOrDefault('use_mixins', false, it -> it.toBoolean()) //TODO Maybe only for Forge/NeoForge, since they are included by default from Fabric
 ext.included_projects = getOrDefault('included_projects', [], it -> stringToStringList(it))
 
-ext.use_shadow = getOrDefault('use_shadow', true, it -> it.toBoolean())
+ext.use_shadow = getOrDefault('use_shadow', false, it -> it.toBoolean())
 
 ext.included_projects = included_projects.findAll {
     def p = findProject(it)
@@ -874,5 +874,6 @@ static boolean satisfiesVersion(String actual, String expected) {
     }
     return true 
 }
+
 
 
