@@ -25,8 +25,8 @@ if (!satisfiesVersion(getProject().getGradle().getGradleVersion(), MIN_GRADLE_VE
 checkProperty('minecraft_version')
 
 checkProperty('mod_id')
+checkProperty('mod_name')
 checkProperty('mod_version')
-checkProperty('mod_display_name')
 
 ext.java_version = getOrDefault('java_version', DEFAULT_JAVA_VERSION) as int
 ext.mod_loader = getOrDefault('mod_loader', DEFAULT_MOD_LOADER)
@@ -496,10 +496,10 @@ jar {
     // This does not seem to be needed anymore with NeoForge, but we will still add it for now
     if (is_neoforge) {
         manifest {
-            attributes(['Specification-Title'     : mod_display_name,
+            attributes(['Specification-Title'     : mod_name,
                         'Specification-Vendor'    : mod_authors.join(', '),
                         'Specification-Version'   : '1',
-                        'Implementation-Title'    : mod_display_name,
+                        'Implementation-Title'    : mod_name,
                         'Implementation-Version'  : mod_version,
                         'Implementation-Vendor'   : mod_authors.join(', '),
                         'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),])
@@ -508,10 +508,10 @@ jar {
 
     if (is_forge) {
         def attrs = [
-                'Specification-Title'     : mod_display_name,
+                'Specification-Title'     : mod_name,
                 'Specification-Vendor'    : mod_authors.join(', '),
                 'Specification-Version'   : '1',
-                'Implementation-Title'    : mod_display_name,
+                'Implementation-Title'    : mod_name,
                 'Implementation-Version'  : mod_version,
                 'Implementation-Vendor'   : mod_authors.join(', '),
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
@@ -651,9 +651,9 @@ if (enable_curseforge_upload) {
             addGameVersion "Java ${java_version}"
             mainArtifact(getUploadArtefact()) {
                 if (curseforge_upload_include_prefix) {
-                    displayName = "[${mod_loader.toUpperCase()}][${minecraft_version}] ${mod_display_name} ${mod_version}"
+                    displayName = "[${mod_loader.toUpperCase()}][${minecraft_version}] ${mod_name} ${mod_version}"
                 } else {
-                    displayName = "${mod_display_name} ${mod_version}"
+                    displayName = "${mod_name} ${mod_version}"
                 }
                 if (curseforge_upload_optional_dependencies || curseforge_upload_required_dependencies) {
                     relations {
@@ -693,7 +693,7 @@ if (enable_curseforge_bukkit_upload) {
             }
             mainArtifact(getUploadArtefact()) {
                 // TODO Don't hardcode
-                displayName = "[BUKKIT/SPIGOT/PAPER] ${mod_display_name} ${mod_version}"
+                displayName = "[BUKKIT/SPIGOT/PAPER] ${mod_name} ${mod_version}"
             }
         }
     }
@@ -718,9 +718,9 @@ if (enable_modrinth_upload) {
         projectId = modrinth_upload_id
         versionNumber = "${mod_loader}-${mod_version}"
         if (modrinth_upload_include_prefix) {
-            versionName = "[${mod_loader.toUpperCase()}][${minecraft_version}] ${mod_display_name} ${mod_version}"
+            versionName = "[${mod_loader.toUpperCase()}][${minecraft_version}] ${mod_name} ${mod_version}"
         } else {
-            versionName = "${mod_display_name} ${mod_version}"
+            versionName = "${mod_name} ${mod_version}"
         }
         uploadFile = getUploadArtefact()
         versionType = upload_release_type.toUpperCase()
@@ -876,3 +876,4 @@ static boolean satisfiesVersion(String actual, String expected) {
     }
     return true 
 }
+
