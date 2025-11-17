@@ -200,7 +200,7 @@ if (use_shadow) {
     checkPlugin('com.gradleup.shadow')
 }
 
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'idea'
 
 idea {
@@ -211,20 +211,15 @@ idea {
 }
 
 subprojects {
-    apply plugin: 'java'
+    apply plugin: 'java-library'
     apply plugin: 'idea'
 }
 
-def java_language_version = JavaLanguageVersion.of(java_version)
-sourceCompatibility = java_language_version
-targetCompatibility = java_language_version
-
-if (hasProperty('java_toolchain_version')) {
-    java.toolchain.languageVersion = JavaLanguageVersion.of(getProperty('java_toolchain_version') as int)
+if (hasProperty('java_version')) {
+    java.toolchain.languageVersion = JavaLanguageVersion.of(getProperty('java_version') as int)
 }
 
 group = getOrDefault('maven_group', "io.github.xorberto.${mod_id.replaceAll('_', '')}")
-archivesBaseName = getOrDefault('archives_base_name', "${mod_id.replaceAll('_', '-')}-${mod_loader}")
 version = mod_version
 
 // Run configurations
@@ -367,6 +362,10 @@ if (is_forge) {
         it.output.resourcesDir = dir
         it.java.destinationDirectory = dir
     }*/
+}
+
+base {
+    archivesName = getOrDefault('archives_base_name', "${mod_id.replaceAll('_', '-')}-${mod_loader}")
 }
 
 // Dependency management
@@ -867,13 +866,10 @@ static boolean satisfiesVersion(String actual, String expected) {
     for (int i = 0; i < maxLength; i++) {
         int actualPart = i < actualParts.size() ? actualParts.get(i) : 0
         int expectedPart = i < expectedParts.size() ? expectedParts.get(i) : 0
-        
+
         if (actualPart != expectedPart) {
             return actualPart > expectedPart
         }
     }
-    return true 
+    return true
 }
-
-
-
